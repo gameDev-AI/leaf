@@ -179,6 +179,22 @@ func (p *Processor) Marshal(msg interface{}) ([][]byte, error) {
 }
 
 // goroutine safe
+func (p *Processor) MarshalWithCode(code, msg interface{}) ([][]byte, error) {
+	_id := code.(uint16)
+
+	id := make([]byte, 2)
+	if p.littleEndian {
+		binary.LittleEndian.PutUint16(id, _id)
+	} else {
+		binary.BigEndian.PutUint16(id, _id)
+	}
+
+	// data
+	data, err := proto.Marshal(msg.(proto.Message))
+	return [][]byte{id, data}, err
+}
+
+// goroutine safe
 func (p *Processor) Range(f func(id uint16, t reflect.Type)) {
 	for id, i := range p.msgInfo {
 		f(uint16(id), i.msgType)

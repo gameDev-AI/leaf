@@ -1,4 +1,4 @@
-Leaf
+Leaf_plus
 ====
 A pragmatic game server framework in Go (golang).
 
@@ -13,13 +13,7 @@ Features
 Community
 ---------
 
-* QQ 群：376389675
-
-Documentation
----------
-
-* [中文文档](https://github.com/name5566/leaf/blob/master/TUTORIAL_ZH.md)
-* [English](https://github.com/name5566/leaf/blob/master/TUTORIAL_EN.md)
+* QQ 群：600486929
 
 Licensing
 ---------

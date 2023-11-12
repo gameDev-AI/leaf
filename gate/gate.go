@@ -135,6 +135,20 @@ func (a *agent) WriteMsg(msg interface{}) {
 	}
 }
 
+func (a *agent) WriteMsgWithCode(opCode, msg interface{}) {
+	if a.gate.Processor != nil {
+		data, err := a.gate.Processor.MarshalWithCode(opCode, msg)
+		if err != nil {
+			log.Error("marshal message %v error: %v", reflect.TypeOf(msg), err)
+			return
+		}
+		err = a.conn.WriteMsg(data...)
+		if err != nil {
+			log.Error("write message %v error: %v", reflect.TypeOf(msg), err)
+		}
+	}
+}
+
 func (a *agent) WriteMsgWithReturn(msg interface{}) [][]byte {
 	if a.gate.Processor != nil {
 		data, err := a.gate.Processor.Marshal(msg)
